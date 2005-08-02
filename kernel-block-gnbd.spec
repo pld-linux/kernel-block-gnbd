@@ -6,8 +6,9 @@
 #
 %define	snap	20050729
 %define _rel	0.%{snap}.1
-Name:		kernel-block-gnbd
 Summary:	Block device driver to share storage to many machines over a network
+Summary(pl):	Sterownik urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
+Name:		kernel-block-gnbd
 Version:	0.1
 Release:	%{_rel}@%{_kernel_ver_str}
 Epoch:		0
@@ -27,20 +28,39 @@ Requires(post,postun):	/sbin/depmod
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The global network block device (GNBD) driver is similar to other network block device drivers. Devices exported by GNBD servers can be used by multiple clients making it suitable for use by a group of GFS nodes.
+The global network block device (GNBD) driver is similar to other
+network block device drivers. Devices exported by GNBD servers can be
+used by multiple clients making it suitable for use by a group of GFS
+nodes.
 
-%package -n kernel-smp-fs-gnbd
-Summary:	kernel-smp-fs-gnbd
-Summary(pl):	Block device driver to share storage to many machines over a network
+%description -l pl
+Sterownik globalnego sieciowego urz±dzenia blokowego (GNBD - global
+network block device) jest podobny do innych sterowników urz±dzeñ
+blokowych. Urz±dzenia eksportowane przez serwery GNBD mog± byæ u¿ywane
+przez wielu klientów, co czyni je odpowiednimi do u¿ywania przez grupy
+wêz³ów GFS.
+
+%package -n kernel-smp-block-gnbd
+Summary:	Block device SMP driver to share storage to many machines over a network
+Summary(pl):	Sterownik SMP urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
 Release:	%{_rel}@%{_kernel_ver_str}
-License:	GPL v2
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
 %{?with_dist_kernel:Requires(postun):	kernel-smp}
 
-%description -n kernel-smp-fs-gnbd
-The global network block device (GNBD) driver is similar to other network block device drivers. Devices exported by GNBD servers can be used by multiple clients making it suitable for use by a group of GFS nodes.
+%description -n kernel-smp-block-gnbd
+The global network block device (GNBD) driver is similar to other
+network block device drivers. Devices exported by GNBD servers can be
+used by multiple clients making it suitable for use by a group of GFS
+nodes.
+
+%description -n kernel-smp-block-gnbd -l pl
+Sterownik globalnego sieciowego urz±dzenia blokowego (GNBD - global
+network block device) jest podobny do innych sterowników urz±dzeñ
+blokowych. Urz±dzenia eksportowane przez serwery GNBD mog± byæ u¿ywane
+przez wielu klientów, co czyni je odpowiednimi do u¿ywania przez grupy
+wêz³ów GFS.
 
 %prep
 %setup -q -n cluster-gnbd-%{snap}
@@ -108,7 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 /lib/modules/%{_kernel_ver}/kernel/drivers/block/gnbd
 
 %if %{with smp} && %{with dist_kernel}
-%files -n kernel-smp-fs-gnbd
+%files -n kernel-smp-block-gnbd
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}smp/kernel/drivers/block/gnbd
 %endif
