@@ -4,19 +4,17 @@
 %bcond_without	smp		# without smp packages
 %bcond_with	verbose		# verbose build (V=1)
 #
-%define	snap	20050729
-%define _rel	0.%{snap}.1
+%define _rel	0.3
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl):	Sterownik urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
 Name:		kernel-block-gnbd
-Version:	0.1
+Version:	1.01.00
 Release:	%{_rel}@%{_kernel_ver_str}
 Epoch:		0
 License:	GPL v2
 Group:		Base/Kernel
-# taken from STABLE branch
-Source0:	cluster-gnbd-%{snap}.tar.gz
-# Source0-md5:	c9fa7c2b7b3fa3a4773f1f1fdf0e4f11
+Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
+# Source0-md5:	e98551b02ee8ed46ae0ab8fca193d751
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	perl-base
 %if %{with kernel}
@@ -63,9 +61,10 @@ przez wielu klientów, co czyni je odpowiednimi do u¿ywania przez grupy
 wêz³ów GFS.
 
 %prep
-%setup -q -n cluster-gnbd-%{snap}
+%setup -q -n cluster-%{version}
 
 %build
+cd gnbd-kernel
 ./configure \
 	--kernel_src=%{_kernelsrcdir}
 cd src
@@ -102,10 +101,10 @@ cd -
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/kernel/drivers/block/gnbd
-install src/gnbd-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
+install gnbd-kernel/src/gnbd-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
 	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/block/gnbd/gnbd.ko
 %if %{with smp} && %{with dist_kernel}
-install src/gnbd-smp.ko \
+install gnbd-kernel/src/gnbd-smp.ko \
 	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/block/gnbd/gnbd.ko
 %endif
 
@@ -118,10 +117,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %depmod %{_kernel_ver}
 
-%post -n kernel-smp-fs-gnbd
+%post -n kernel-smp-block-gnbd
 %depmod %{_kernel_ver}smp
 
-%postun -n kernel-smp-fs-gnbd
+%postun -n kernel-smp-block-gnbd
 %depmod %{_kernel_ver}smp
 
 %files
