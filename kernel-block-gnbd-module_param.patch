@@ -1,0 +1,11 @@
+--- cluster-1.02.00/gnbd-kernel/src/gnbd.c~	2006-02-13 21:34:17.000000000 +0100
++++ cluster-1.02.00/gnbd-kernel/src/gnbd.c	2006-06-25 13:56:21.000000000 +0200
+@@ -1048,6 +1048,7 @@
+ MODULE_LICENSE("GPL");
+ 
+ #ifndef NDEBUG
+-MODULE_PARM(debugflags, "i");
++int debugcflags = 0;
++module_param(debugflags, int, 0);
+ MODULE_PARM_DESC(debugflags, "flags for controlling debug output");
+ #endif
