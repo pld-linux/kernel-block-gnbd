@@ -7,7 +7,7 @@
 %define _rel	0.3
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl):	Sterownik urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
-Name:		kernel-block-gnbd
+Name:		kernel%{_alt_kernel}-block-gnbd
 Version:	1.02.00
 Release:	%{_rel}@%{_kernel_ver_str}
 Epoch:		0
@@ -15,10 +15,11 @@ License:	GPL v2
 Group:		Base/Kernel
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
 # Source0-md5:	131c34c8b66d8d7d74384839ed4091d0
+Patch0:		kernel-block-gnbd-module_param.patch
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	perl-base
 %if %{with kernel}
-%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.7}
+%{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.7}
 %endif
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
@@ -38,7 +39,7 @@ blokowych. Urz±dzenia eksportowane przez serwery GNBD mog± byæ u¿ywane
 przez wielu klientów, co czyni je odpowiednimi do u¿ywania przez grupy
 wêz³ów GFS.
 
-%package -n kernel-smp-block-gnbd
+%package -n kernel%{_alt_kernel}-smp-block-gnbd
 Summary:	Block device SMP driver to share storage to many machines over a network
 Summary(pl):	Sterownik SMP urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
 Release:	%{_rel}@%{_kernel_ver_str}
@@ -47,13 +48,13 @@ Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 %{?with_dist_kernel:Requires(postun):	kernel-smp}
 
-%description -n kernel-smp-block-gnbd
+%description -n kernel%{_alt_kernel}-smp-block-gnbd
 The global network block device (GNBD) driver is similar to other
 network block device drivers. Devices exported by GNBD servers can be
 used by multiple clients making it suitable for use by a group of GFS
 nodes.
 
-%description -n kernel-smp-block-gnbd -l pl
+%description -n kernel%{_alt_kernel}-smp-block-gnbd -l pl
 Sterownik globalnego sieciowego urz±dzenia blokowego (GNBD - global
 network block device) jest podobny do innych sterowników urz±dzeñ
 blokowych. Urz±dzenia eksportowane przez serwery GNBD mog± byæ u¿ywane
@@ -62,6 +63,7 @@ wêz³ów GFS.
 
 %prep
 %setup -q -n cluster-%{version}
+%patch0 -p1
 
 %build
 cd gnbd-kernel
@@ -124,10 +126,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %depmod %{_kernel_ver}
 
-%post -n kernel-smp-block-gnbd
+%post -n kernel%{_alt_kernel}-smp-block-gnbd
 %depmod %{_kernel_ver}smp
 
-%postun -n kernel-smp-block-gnbd
+%postun -n kernel%{_alt_kernel}-smp-block-gnbd
 %depmod %{_kernel_ver}smp
 
 %files
@@ -135,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 /lib/modules/%{_kernel_ver}/kernel/drivers/block/gnbd
 
 %if %{with smp} && %{with dist_kernel}
-%files -n kernel-smp-block-gnbd
+%files -n kernel%{_alt_kernel}-smp-block-gnbd
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}smp/kernel/drivers/block/gnbd
 %endif
