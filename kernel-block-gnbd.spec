@@ -8,14 +8,13 @@
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl):	Sterownik urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
 Name:		kernel%{_alt_kernel}-block-gnbd
-Version:	1.02.00
+Version:	1.03.00
 Release:	%{_rel}@%{_kernel_ver_str}
 Epoch:		0
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
-# Source0-md5:	131c34c8b66d8d7d74384839ed4091d0
-Patch0:		kernel-block-gnbd-module_param.patch
+# Source0-md5:	8eea23df70d2007c4fb8c234cfea49cf
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	perl-base
 %if %{with kernel}
@@ -64,7 +63,6 @@ wêz³ów GFS.
 
 %prep
 %setup -q -n cluster-%{version}
-%patch0 -p1
 
 %build
 cd gnbd-kernel
