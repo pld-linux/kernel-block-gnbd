@@ -6,7 +6,7 @@
 #
 %define _rel	0.3
 Summary:	Block device driver to share storage to many machines over a network
-Summary(pl):	Sterownik urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
+Summary(pl.UTF-8):   Sterownik urzÄ…dzenia blokowego do wspÃ³Å‚dzielenia przestrzeni miÄ™dzy wieloma maszynami w sieci
 Name:		kernel%{_alt_kernel}-block-gnbd
 Version:	1.03.00
 Release:	%{_rel}@%{_kernel_ver_str}
@@ -32,16 +32,16 @@ network block device drivers. Devices exported by GNBD servers can be
 used by multiple clients making it suitable for use by a group of GFS
 nodes.
 
-%description -l pl
-Sterownik globalnego sieciowego urz±dzenia blokowego (GNBD - global
-network block device) jest podobny do innych sterowników urz±dzeñ
-blokowych. Urz±dzenia eksportowane przez serwery GNBD mog± byæ u¿ywane
-przez wielu klientów, co czyni je odpowiednimi do u¿ywania przez grupy
-wêz³ów GFS.
+%description -l pl.UTF-8
+Sterownik globalnego sieciowego urzÄ…dzenia blokowego (GNBD - global
+network block device) jest podobny do innych sterownikÃ³w urzÄ…dzeÅ„
+blokowych. UrzÄ…dzenia eksportowane przez serwery GNBD mogÄ… byÄ‡ uÅ¼ywane
+przez wielu klientÃ³w, co czyni je odpowiednimi do uÅ¼ywania przez grupy
+wÄ™zÅ‚Ã³w GFS.
 
 %package -n kernel%{_alt_kernel}-smp-block-gnbd
 Summary:	Block device SMP driver to share storage to many machines over a network
-Summary(pl):	Sterownik SMP urz±dzenia blokowego do wspó³dzielenia przestrzeni miêdzy wieloma maszynami w sieci
+Summary(pl.UTF-8):   Sterownik SMP urzÄ…dzenia blokowego do wspÃ³Å‚dzielenia przestrzeni miÄ™dzy wieloma maszynami w sieci
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
@@ -54,12 +54,12 @@ network block device drivers. Devices exported by GNBD servers can be
 used by multiple clients making it suitable for use by a group of GFS
 nodes.
 
-%description -n kernel%{_alt_kernel}-smp-block-gnbd -l pl
-Sterownik globalnego sieciowego urz±dzenia blokowego (GNBD - global
-network block device) jest podobny do innych sterowników urz±dzeñ
-blokowych. Urz±dzenia eksportowane przez serwery GNBD mog± byæ u¿ywane
-przez wielu klientów, co czyni je odpowiednimi do u¿ywania przez grupy
-wêz³ów GFS.
+%description -n kernel%{_alt_kernel}-smp-block-gnbd -l pl.UTF-8
+Sterownik globalnego sieciowego urzÄ…dzenia blokowego (GNBD - global
+network block device) jest podobny do innych sterownikÃ³w urzÄ…dzeÅ„
+blokowych. UrzÄ…dzenia eksportowane przez serwery GNBD mogÄ… byÄ‡ uÅ¼ywane
+przez wielu klientÃ³w, co czyni je odpowiednimi do uÅ¼ywania przez grupy
+wÄ™zÅ‚Ã³w GFS.
 
 %prep
 %setup -q -n cluster-%{version}
