@@ -6,7 +6,7 @@
 #
 %define _rel	0.3
 Summary:	Block device driver to share storage to many machines over a network
-Summary(pl.UTF-8):   Sterownik urządzenia blokowego do współdzielenia przestrzeni między wieloma maszynami w sieci
+Summary(pl.UTF-8):	Sterownik urządzenia blokowego do współdzielenia przestrzeni między wieloma maszynami w sieci
 Name:		kernel%{_alt_kernel}-block-gnbd
 Version:	1.03.00
 Release:	%{_rel}@%{_kernel_ver_str}
@@ -41,7 +41,7 @@ węzłów GFS.
 
 %package -n kernel%{_alt_kernel}-smp-block-gnbd
 Summary:	Block device SMP driver to share storage to many machines over a network
-Summary(pl.UTF-8):   Sterownik SMP urządzenia blokowego do współdzielenia przestrzeni między wieloma maszynami w sieci
+Summary(pl.UTF-8):	Sterownik SMP urządzenia blokowego do współdzielenia przestrzeni między wieloma maszynami w sieci
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
