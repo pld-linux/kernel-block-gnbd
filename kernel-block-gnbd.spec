@@ -1,7 +1,8 @@
 #
 # Condtional build:
 %bcond_without	dist_kernel	# without distribution kernel
-%bcond_without	smp		# without smp packages
+%bcond_without	up		# without UP packages
+%bcond_without	smp		# without SMP packages
 %bcond_with	verbose		# verbose build (V=1)
 #
 %define _rel	0.3
@@ -131,9 +132,11 @@ rm -rf $RPM_BUILD_ROOT
 %postun -n kernel%{_alt_kernel}-smp-block-gnbd
 %depmod %{_kernel_ver}smp
 
+%if %{with up} || %{without dist_kernel}
 %files
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/kernel/drivers/block/gnbd
+%endif
 
 %if %{with smp} && %{with dist_kernel}
 %files -n kernel%{_alt_kernel}-smp-block-gnbd
